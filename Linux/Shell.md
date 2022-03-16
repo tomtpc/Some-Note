@@ -1,6 +1,5 @@
-﻿# Tìm hiểu về Linux
-Xin chào! Mình tên là Thành, bạn có thể gọi mình là Tom cho dễ nhớ. Tại **repository** mình sẽ hệ thống lại một số kiến thức cơ bản liên quan đến hệ điều hành Linux mà mình đã có thời gian học tập, tìm hiểu và thực hành tại ***BizFly***.
-Tại vì một mục cần tìm hiểu sẽ rất rất rất dài nếu viết trong 1 file. Mình sẽ để mỗi mục to ra một file, bạn cần học phần nào thì chỉ cần tìm để mục đó thôi <3.
+﻿# Tìm hiểu về Linux [1]
+Trong phần này, ta sẽ học những kiến thức cơ bản nhất về Shell trong Linux.
 >Tất cả kiến thức được viết bên dưới  được dựa vào cuốn sách: **[LPIC]Linux Professional Institute Certification Study Guide**
 # Shell
 Một số phần mềm Shell bạn cần biết:
@@ -137,15 +136,15 @@ Nếu là lệnh trong luồng thì sẽ là `is a shell buildin` còn ngoài lu
 |LANG|Danh mục ngôn ngữ của Shell|
 |LC_*|Các danh mục cài đặt tùy chỉnh LANG|
 |LC_ALL|Danh mục ngôn ngữ cho Shell để tùy chỉnh LANG|
-|LD_LIBRARY_PATH||
-|PATH||
-|PS1||
-|PS2||
-|PWD||
-|SHLVL||
-|TZ||
-|UID||
-|VISUAL||
+|LD_LIBRARY_PATH|Danh sách các thư viện được phân cách bởi `:` giúp tìm kiếm trước các thư viện tiêu chuẩn|
+|PATH|Danh sách thư mục được phân cách bởi `:` để dẫn đến phần thực câu lệnh|
+|PS1|Giao diện Shell chính|
+|PS2|Giao diện Shell phụ|
+|PWD|Thư mục người dùng hiện tại|
+|SHLVL|Cấp bậc của Shell hiện tại|
+|TZ|Vùng thời gian của người dùng hiện tại (Time Zone)|
+|UID|ID của người dùng hiện tại|
+|VISUAL|Trình chỉnh sửa văn bản mặc định|
 ### Hiển thị các biến môi trường đang hoạt động:
 ```
 tomtpc@training~$: set
@@ -203,6 +202,7 @@ Hello World !
 | PS2| Đây là cửa sổ phụ. Nó thường được sử dụng để ngăn cách với các cửa sổ hiển thị và phần nhập dữ liệu. Đồng thời đôi khi được sử dụng để hiển thị một lệnh dài được chia thành nhiều phần với dấu `\`.|
 | PS3| Đây là cửa sổ chuyên cho câu lệnh `select`. |
 | PS4| Đây là cửa sổ sử dụng để chạy Shell Script trong chế độ Debug. |
+
 Thông thường, chúng ta sẽ chỉ sử dụng `PS1` và có thể  là `PS2`.
 ```
 tomtpc@training:~$ PS1="My new prompt"
@@ -333,6 +333,7 @@ Nếu như ta muốn cập nhập file lịch sử lệnh hoặc danh sách lị
 |-s|--squeeze-blank|Không hiển thị các dòng trống.|
 |-T|--show-tabs|Hiển thị `^I` khi gặp dấu `tab`.|
 |-v|--show-nonprinting|Hiển thị các ký tự không in khi gặp bằng `^` và `/`|
+
 Vì có thể hiển thị các ký tự không in được, nên nếu như ta đang có một file mà không thể nào sắp xếp được thì có thể sử dụng `cat -v [File]` để xem có ký tự không in nào không.
 ### So sánh file ngang hàng:
 Nếu như `cat` hiển thị hàng dọc lần lượt các files được truyền vào thì `paste` sẽ để chúng ngang hàng cho ta xem để đối chiếu dễ dàng hơn.
@@ -364,7 +365,7 @@ Cột đầu tiên sẽ là chỉ số của mỗi hàng được hiển thị l
 ```
 tomtpc@training:~$ od -cb test1.txt
 0000000		t	o	m	\n	k	m	a	\n	a	c	t	\n	t	p	c	\n
-			164	157	155	012	153	155	141	012	141	143	164	012	164	160	143	012
+		164	157	155	012	153	155	141	012	141	143	164	012	164	160	143	012
 0000020
 ```
 ### Chia nhỏ file:
@@ -442,3 +443,91 @@ tomtpc@training:~$ sort -n numbers.txt
 Trong lần sắp xếp đầu tiên khi không có tùy chọn `-n` thì ta có thể thấy là thứ tự sắp xếp không được chính xác. Khi có thêm tùy chọn `-n` dành cho dữ liệu số thì mọi thứ đã đúng trật tự như ta mong muốn.
 ### Đánh số văn bản:
 Một công cụ hữu ích khác khi ta thao tác với dữ liệu dưới dạng văn bản, đó là `nl` giúp ta đánh số các dòng.
+Cấu trúc lệnh: `nl [Tùy Chọn]... [File]`
+Nếu như ta không sử dụng bất kỳ `[Tùy Chọn]` của `nl` thì nó sẽ chỉ đếm những dòng không trống.
+```
+tomtpc@training:~$ nl ContainsBlankLines.txt 
+1 Alpha 
+2 Tango 
+
+3 Bravo 
+4 Echo 
+
+
+5 Foxtrot
+```
+Nếu như muốn đếm thêm các dòng trống thì ta thêm tùy chọn `-ba`.
+```
+tomtpc@training:~$ nl -ba ContainsBlankLines.txt
+1 Alpha 
+2 Tango 
+3 
+4 Bravo 
+5 Echo 
+6 
+7 
+8 Foxtrot
+```
+## Một số lệnh xem file
+Một trong những công việc thường được làm trong Linux đó là xem dữ liệu của 1 file. Nếu như file đó ngắn, dung lượng ít thì ta có thể sử dụng `cat` như đề cập bên trên để xem. Nhưng nếu như file đó có đến cả trăm dòng, nghìn dòng thì sao? Sau đây là một số câu lệnh vô cùng hữu ích để xem những file như vậy.
+### Lệnh `more` và `less`:
+Cách đơn giản khi ta muốn xem dữ liệu của một file lớn đến trăm, nghìn dòng là sử dụng `pager`. Như cái tên của nó, nó sẽ hiển thị  dữ liệu lên màn hình như trên một trang giấy. `pager` thường được sử dụng trong 2 câu lệnh `less` và ` more`.
+`more [Tùy Chọn]... [File]...`
+Nếu như ta sử dụng  `more` thì bên trên là cấu trúc câu lệnh của nó. `more` sẽ hiển thị dữ liệu trên màn hình, ta có thể di chuyển màn hình xuống để xem nội dung tiếp theo bằng cách bấm `Phím cách`(đi xuống 1 trang) hoặc nút `Enter`(đi xuống 1 dòng). Tuy vậy, `more` lại không cho ta đi lên để xem các nội dung đã qua. Để thoát khỏi chế độ xem dữ liệu của `more` thì ta bấm nút `Q`.
+Khác với cái tên `less` lại vừa có thể thực thi chức năng của `more` mà lại cho ta xem các dữ liệu đã qua. Cấu trúc của `less` cũng giống như `more`.
+`less [Tùy Chọn]... [File]...`
+Còn hơn cả `more`, `less` đọc dữ liệu của file rất nhanh và ít tốn tài nguyên hệ thống. Bởi vì `less` không đọc liền một lúc tất cả dữ liệu của file rồi hiển thị chúng lên như `more`, nó sẽ đọc dữ liệu dần dần theo quá trình đọc của người dùng.
+Sử dụng `less` để xem dữ liệu thì ta có thể sử dụng phím `mũi tên lên` và `mũi tên xuống` để di chuyển xuống/lên 1 dòng cũng như là phím `cách` (đi xuống 1 trang) hay tổ hợp `ESC V` để lùi 1 trang. Thậm chí khi bấm `? [Từ cần tìm] + Enter` hoặc `/ [Từ cần tìm] + Enter`thì ta có thể tìm từ mong muốn trong file đang xem, khác nhau ở chỗ là `?` sẽ tìm xuôi từ chỗ ta đang đọc xuống còn `/` thì ngược lại. Và cuối cùng, để thoát khỏi chế độ đọc thì ta bấm `Q`.
+Còn rất nhiều các `[Tùy Chọn]` tuyệt vời mà `less` mang đến, ta nên lượn 1 vòng trong thư viện `man` để xem.
+Xem thêm về `less`: `man less`
+### Lệnh `head`:
+Không muốn xem cả một file lớn và dài chỉ để lấy dữ liệu của vài dòng đầu file? `head` sẽ giúp ta khoản này.
+`head [Tùy Chọn]... [File]...`
+Mặc định nếu không có `[Tùy Chọn]` thì `head` sẽ hiển thị **10** dòng đầu tiên của file.
+```
+tomtpc@training:~$ head /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+```
+Để hiển thị nhiều hơn hay ít hơn thì ta sử dụng tùy chọn `-n` hoặc `--lines=` sau đó là số dòng muốn hiển thị.
+```
+tomtpc@training:~$ head -n 2 /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+```
+Hoặc
+```
+tomtpc@training:~$ head -2 /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+```
+### Lệnh `tail`:
+Nếu như ta muốn theo dõi các dữ liệu mới nhất được thêm vào file thì sao? Mở  `less` hoặc `more` hay `cat` rồi kéo xuống cuối ư? Không, `tail` sẽ cho ta xem những dòng cuối cùng của file.
+`tail [Tùy Chọn]... [File]...`
+Tương tự như `head` mặc định của `tail` là xem **10** dòng cuối cùng của file. Ta cũng có thể xem số lượng khác bằng tùy chọn `-n` hoặc `--lines=`.
+```
+tomtpc@training:~$ tail /etc/passwd
+saslauth:x:992:76:Saslauthd
+user:/run/saslauthd:/sbin/nologin
+pulse:x:171:171:PulseAudio SystemDaemon:/var/run/pulse:/sbin/nologin
+gdm:x:42:42::/var/lib/gdm:/sbin/nologin
+setroubleshoot:x:991:985::/var/lib/setroubleshoot:/sbin/nologin 
+rpcuser:x:29:29:RPC Ser viceUser:/var/lib/nfs:/sbin/nologin 
+nfsnobody:x:65534:65534:Anonymous NFS User:/var/lib/nfs:/sbin/nologin
+sssd:x:990:984:User for sssd:/:/sbin/nologin gnome-initialsetup:x:989:983::/run/gnome-initial-setup/:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
+```
+```
+tomtpc@training:~$ tail -n 2 /etc/passwd
+tcpdump:x:72:72::/:/sbin/nologin
+avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
+```
