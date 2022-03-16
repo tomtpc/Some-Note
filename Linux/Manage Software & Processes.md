@@ -9,7 +9,7 @@ Một file cài đặt DPKG thường có đuôi là `.deb` và có định dạ
 `PACKAGE_NAME-VERSION-RELEASE.ARCHITECTURE.deb`
 
 Trong đó:
-***`PACKAGE_NAME`*** : đây sẽ là tên của phần mềm. Ví dụ như ta muốn cài đặt trình biên soạn `emacs`, thì file RPM của nó sẽ có tên là `emacs`. Nhưng lưu ý rằng, mỗi một phiên bản Linux khác nhau thì sẽ có tên gói khác nhau.
+***`PACKAGE_NAME`*** : đây sẽ là tên của phần mềm. Ví dụ như ta muốn cài đặt trình biên soạn `emacs`, thì file `.deb` của nó sẽ có tên là `emacs`. Nhưng lưu ý rằng, mỗi một phiên bản Linux khác nhau thì sẽ có tên gói khác nhau.
 
 ***`VERSION`*** : đây là số phiên bản của chương trình. Bình thường số phiên bản sẽ bao gồm 2 đến 3 số cách nhau bởi dấu `.`. Ví dụ: 1.13.1 hay 7.4p1.
 
