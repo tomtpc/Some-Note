@@ -4,8 +4,7 @@ Xin chào! Mình tên là Thành, bạn có thể gọi mình là Tom cho dễ n
 
  - [Linux cơ bản](https://github.com/tomtpc/Intern-BizflyCloud/tree/main/Linux)
 	- [Shell](https://github.com/tomtpc/Intern-BizflyCloud/blob/main/Linux/Shell.md)
-	- [Quản lý phần mềm và tiến trình](https://github.com/tomtpc/Intern-BizflyCloud/blob/main/Linux/Manage%20Software%20%26%20Processes.md)
-	- [Cấu hình phần cứng]()
+	- [Software & Processes](https://github.com/tomtpc/Intern-BizflyCloud/blob/main/Linux/Manage%20Process.md)
  - [Network]()
  - [Virtualization]()
  - [OpenStack]()
