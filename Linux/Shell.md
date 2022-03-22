@@ -531,3 +531,55 @@ tomtpc@training:~$ tail -n 2 /etc/passwd
 tcpdump:x:72:72::/:/sbin/nologin
 avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
 ```
+Một trong những công dụng cô cùng hữu ích của `tail` đó là có thể xem trực tiếp các file log. Log hay còn có tên tiếng Việt là, nhật ký, các file này sẽ được ghi thêm dữ liệu vào cuối mỗi khi được cập nhật. Chính vì thế nên việc xem những dòng cuối của 1 file log đồng nghĩa với việc ta đang theo dõi những dữ liệu mới nhất của file log đó. Tùy chọn `-f` của `tail` sẽ giúp ta xem trực tiếp, liên tục các dòng cuối của file.
+```
+tomtpc@training:~$ sudo tail -f /var/log/auth.log
+Mar 16 15:31:43 training usermod[211017]: change user 'sshd' password
+Mar 16 15:31:43 training chage[211025]: changed password expiry for sshd       
+Mar 16 15:31:45 training sshd[211278]: Server listening on 0.0.0.0 port 22.
+Mar 16 15:31:45 training sshd[211278]: Server listening on :: port 22.
+Mar 16 15:31:47 training sudo: pam_unix(sudo:session): session closed for user root              
+Mar 16 15:31:58 training sshd[211658]: Accepted password for tomtpc from 192.168.220.1 port 59813 ssh2
+Mar 16 15:31:58 training sshd[211658]: pam_unix(sshd:session): session opened for user tomtpc by (ui│d=0)                                                 
+Mar 16 15:31:58 training systemd-logind[899]: New session 7 of user tomtpc.                         
+Mar 16 15:32:51 training sudo:   tomtpc : TTY=pts/1 ; PWD=/home/tomtpc ; USER=root ; COMMAND=/usr/bi│n/tail -f /var/log/auth.log                                
+Mar 16 15:32:51 training sudo: pam_unix(sudo:session): session opened for user root by tomtpc(uid=0)                                                                                                          
+```
+Để thoát khỏi chế độ xem trực tiếp, bấm tổ hợp phím `Ctrl C`.
+
+## Các lệnh tóm tắt tệp
+Tóm tắt, nắm bắt các thông tin tổng quan về tệp khi phân tích một gói hay vấn đề nào đó là công việc bắt buộc. Bên dưới là một số lệnh có thể giúp ta nắm bắt một số thống tin nhất định về tệp.
+### Sử dụng `wc` để đếm:
+Cách đơn giản và phổ biến nhất để đếm trong một tệp văn bản là sử dụng lệnh `wc`.
+`wc [Tùy Chọn]... [File]...`
+Nếu như ta không có sử dụng bất kỳ tùy chọn nào của `wc` thì chương trình mặc định sẽ in ra theo thứ tự: số dòng, số từ, và số bytes.
+```
+tomtpc@training:~$ wc Alphabet.txt
+ 6  6 31 Alphabet.txt
+```
+Một số tùy chọn trong `wc`:
+| Viết tắt | Đầy đủ | Ý nghĩa |
+|--|--|--|
+| -c | - -bytes | Hiển thị số bytes của tệp |
+| -L | - -max-line-length | Hiển thị số bytes của dòng dài nhất |
+| -l | - -lines | Hiện thị số lượng dòng có trong file |
+| -m | - -chars | Hiện thị số lượng ký tự trong file |
+| -w | - -words | Hiện thị số lượng từ trong file |
+
+### Lọc dữ liệu với `cut`:
+Lệnh `cut` trong Linux để giúp ta sàng dữ liệu trong những file văn bản lớn. 
+`cut [Tùy Chọn]... [File]...`
+Trước khi đi sâu hơn về lệnh `cut` ta cần hiểu một số khái niệm sau:
+
+ - ***Tệp ghi văn bản*** (Text File Records)
+ - ***Phân cách tệp ghi văn bản***(Text File Record Delimiter):
+ - ***Thay đổi tệp văn bản***(Text File Changes):
+ 
+| Viết tắt | Đầy đủ | Ý nghĩa |
+|--|--|--|
+| -c nlist | - - characters nlist | Chỉ hiển thị các ký tự ở bản ghi có trong danh sách `nlist` |
+| -b blist | - -bytes blist | Chỉ hiển thị các bytes ở bản ghi có trong danh sách `bllist` |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
