@@ -19,17 +19,20 @@
 - Config stats for DHCP server:
 			- `sudo vim /etc/dhcp/dhcpd.conf`
 			- Adding these lines:
-				`subnet 20.75.20.0 netmask 255.255.255.0 {
-		range 20.75.20.100 20.75.20.200;
-		option routers 20.75.20.1;
-		option domain-name-servers 20.75.20.1;
-		option domain-name "example.com";
-		}`
-				
+```
+subnet 20.75.20.0 netmask 255.255.255.0 {
+	range 20.75.20.100 20.75.20.200;
+	option routers 20.75.20.1;
+	option domain-name-servers 20.75.20.1;
+	option domain-name "example.com";
+}
+```
+
 *Note:* 
 				`20.75.20.0` is the IPs you want to provide.
 				`255.255.255.0` is the subnet-mask.
-				2 values after the `range` means start IP and end IP in IPs DHCP pool.
+				2 values after the `range` means start IP and end IP in IPs DHCP
+				pool.
 - Apply changes:
 				- `sudo service isc-dhcp-server restart`
 				- `sudo service isc-dhcp-server status`
@@ -39,5 +42,5 @@
 - You config to something like this:
 ![Sample IMG](https://github.com/tomtpc/Intern-BizflyCloud/blob/main/Images/static-ip-for-00-installer-config.png)
 - Apply changes:
-	 -`sudo netplan apply`
-	 -`ip a` to check that the wanted Interface has received IP address from DHCP.
+	- `sudo netplan apply`.
+	- `ip a` to check that the wanted Interface has received IP address from DHCP.
