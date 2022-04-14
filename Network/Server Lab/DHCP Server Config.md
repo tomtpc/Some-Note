@@ -8,7 +8,8 @@
 	- `sudo apt install isc-dhcp-server -y` 
 2. Config ***isc-dhcp-server***:
 - Config listening Interface:
-	- `sudo vim /etc/default/isc-dhcp-server`	![Sample IMG](https://github.com/tomtpc/Intern-BizflyCloud/blob/main/Images/config-listening-interface-dhcpServer.png)
+	- `sudo vim /etc/default/isc-dhcp-server`
+	- ![Sample IMG](https://github.com/tomtpc/Intern-BizflyCloud/blob/main/Images/config-listening-interface-dhcpServer.png)
 	- Remove ***#*** sign for the following:
 				`DHCPDv4_CONF=/etc/dhcp/dhcpd.conf`
 				`DHCPDv4_PID=/var/run/dhcpd.pid`
@@ -37,7 +38,7 @@
 1. `ip a` to get the Interface that you want.
 2. `sudo vim /etc/netplan/00-installer-config.yaml`
 - You config to something like this:
-![Sample IMG](https://github.com/tomtpc/Intern-BizflyCloud/blob/main/Images/static-ip-for-00-installer-config.png)
+- ![Sample IMG](https://github.com/tomtpc/Intern-BizflyCloud/blob/main/Images/static-ip-for-00-installer-config.png)
 - Apply changes:
-	 -`sudo netplan apply`
-	 -`ip a` to check that the wanted Interface has received IP address from DHCP.
+	 - `sudo netplan apply`
+	 - `ip a` to check that the wanted Interface has received IP address from DHCP.
